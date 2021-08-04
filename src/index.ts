@@ -1,9 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const path = require("path");
-const util = require("util");
-const exec = util.promisify(require("child_process").exec);
+import path from "path";
+import util from "util";
+import childProcess from "child_process";
 
-const generateSolve = (filePath: string) => {
+const exec = util.promisify(childProcess.exec);
+
+type GenerateSolve = (filePath: string) => (input: string) => Promise<string>;
+
+const generateSolve: GenerateSolve = (filePath) => {
   if (!path.isAbsolute(filePath)) {
     throw new TypeError(
       `Invalid filePath: ${filePath}\nfilePath should be an absolute path`
@@ -17,4 +20,4 @@ const generateSolve = (filePath: string) => {
   };
 };
 
-module.exports = generateSolve;
+export default generateSolve;
