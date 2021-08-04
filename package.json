@@ -1,0 +1,50 @@
+{
+  "name": "solve.io",
+  "version": "0.0.1",
+  "description": "테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint --cache --fix .",
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigsaigon333/solve.io.git"
+  },
+  "keywords": [
+    "PS",
+    "algorithms",
+    "jest",
+    "boj"
+  ],
+  "author": "Danny Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigsaigon333/solve.io/issues"
+  },
+  "homepage": "https://github.com/bigsaigon333/solve.io#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.10",
+    "@typescript-eslint/eslint-plugin": "^4.29.0",
+    "@typescript-eslint/parser": "^4.29.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "lint-staged": "^11.1.1",
+    "prettier": "2.3.2",
+    "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*": "prettier --ignore-unknown --write"
+  }
+}
