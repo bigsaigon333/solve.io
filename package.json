@@ -1,0 +1,31 @@
+{
+  "name": "solve.io",
+  "version": "0.0.1",
+  "description": "테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigsaigon333/solve.io.git"
+  },
+  "keywords": [
+    "PS",
+    "algorithms",
+    "jest",
+    "boj"
+  ],
+  "author": "Danny Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bigsaigon333/solve.io/issues"
+  },
+  "homepage": "https://github.com/bigsaigon333/solve.io#readme",
+  "dependencies": {
+    "@types/node": "^16.4.10",
+    "typescript": "^4.3.5"
+  }
+}
