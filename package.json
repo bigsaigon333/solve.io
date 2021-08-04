@@ -8,7 +8,8 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint --cache --fix .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -32,7 +33,16 @@
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.1",
     "prettier": "2.3.2",
     "typescript": "^4.3.5"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --cache --fix",
+      "prettier --write"
+    ],
+    "*": "prettier --ignore-unknown --write"
   }
 }
