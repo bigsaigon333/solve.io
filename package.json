@@ -21,7 +21,11 @@
     "jest",
     "boj"
   ],
-  "author": "Danny Kim",
+  "author": {
+    "name": "Danny Kim",
+    "email": "likepeppermint@gmail.com",
+    "url": "https://velog.io/@bigsaigon333"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bigsaigon333/solve.io/issues"
