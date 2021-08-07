@@ -4,9 +4,9 @@ import childProcess from "child_process";
 
 const exec = util.promisify(childProcess.exec);
 
-type GenerateSolve = (filePath: string) => (input: string) => Promise<string>;
-
-const generateSolve: GenerateSolve = (filePath) => {
+const generateSolve = (
+  filePath: string
+): ((input: string) => Promise<string>) => {
   if (!path.isAbsolute(filePath)) {
     throw new TypeError(
       `Invalid filePath: ${filePath}\nfilePath should be an absolute path`
@@ -20,4 +20,4 @@ const generateSolve: GenerateSolve = (filePath) => {
   };
 };
 
-export default generateSolve;
+export = generateSolve;
