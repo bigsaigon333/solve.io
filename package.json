@@ -4,6 +4,9 @@
   "description": "테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc --project tsconfig.prod.json",
@@ -23,7 +26,7 @@
     "boj"
   ],
   "author": {
-    "name": "Danny Kim",
+    "name": "bigsaigon333",
     "email": "likepeppermint@gmail.com",
     "url": "https://velog.io/@bigsaigon333"
   },
