@@ -1,10 +1,6 @@
 # solve&#46;io
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![npm version](https://badge.fury.io/js/solve.io.svg)](https://badge.fury.io/js/solve.io)
 
 테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구
 
