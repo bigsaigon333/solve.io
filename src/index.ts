@@ -1,4 +1,4 @@
 import { runExit } from "clipanion";
-import { HelloCommand } from "./command";
+import { SolveCommand } from "./command";
 
-runExit(HelloCommand);
+runExit(SolveCommand);
