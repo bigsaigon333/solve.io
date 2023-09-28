@@ -11,10 +11,11 @@
     "build": "tsc --project tsconfig.prod.json",
     "dev": "tsx src/index.ts",
     "dev:watch": "tsx watch src/index.ts",
-    "format": "prettier --write .",
-    "lint": "eslint --cache --fix .",
+    "prettier": "prettier --write .",
+    "eslint": "eslint --cache --fix .",
     "prebuild": "rm -rf dist",
     "preinstall": "npx only-allow pnpm",
+    "prepack": "pnpm build",
     "prepare": "husky install",
     "test": "jest"
   },
