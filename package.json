@@ -1,22 +1,23 @@
 {
   "name": "solve.io",
-  "version": "0.0.2",
-  "description": "테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구",
+  "version": "0.0.3",
+  "description": "알고리즘 문제 풀이를 위한 I/O Cli",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "files": [
-    "dist/**/*"
+    "/dist"
   ],
+  "bin": {
+    "solve.io": "dist/index.js"
+  },
   "scripts": {
-    "build": "tsc --project tsconfig.prod.json",
-    "dev": "tsx src/index.ts",
+    "build": "tsup",
     "dev:watch": "tsx watch src/index.ts",
-    "prettier": "prettier --write .",
+    "dev": "tsx src/index.ts",
     "eslint": "eslint --cache --fix .",
-    "prebuild": "rm -rf dist",
     "preinstall": "npx only-allow pnpm",
     "prepack": "pnpm build",
     "prepare": "husky install",
+    "prettier": "prettier --write .",
     "test": "jest"
   },
   "repository": {
@@ -32,7 +33,7 @@
   "author": {
     "name": "Danny Kim",
     "email": "likepeppermint@gmail.com",
-    "url": "https://velog.io/@bigsaigon333"
+    "url": "https://bigsaigon333.github.io"
   },
   "license": "MIT",
   "bugs": {
@@ -53,6 +54,7 @@
     "only-allow": "^1.2.0",
     "prettier": "2.3.2",
     "ts-jest": "^27.0.4",
+    "tsup": "^7.2.0",
     "tsx": "^3.13.0",
     "typescript": "^4.3.5"
   },
@@ -65,5 +67,9 @@
   },
   "dependencies": {
     "clipanion": "4.0.0-rc.2"
-  }
+  },
+  "engines": {
+    "node": ">=16.13.1"
+  },
+  "packageManager": "pnpm@8.6.0"
 }
