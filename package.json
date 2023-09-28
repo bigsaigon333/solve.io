@@ -2,12 +2,12 @@
   "name": "solve.io",
   "version": "0.0.3",
   "description": "알고리즘 문제 풀이를 위한 I/O Cli",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "files": [
     "/dist"
   ],
   "bin": {
-    "solve.io": "dist/index.js"
+    "solve.io": "dist/index.cjs"
   },
   "scripts": {
     "build": "tsup",
@@ -18,7 +18,8 @@
     "prepack": "pnpm build",
     "prepare": "husky install",
     "prettier": "prettier --write .",
-    "test": "jest"
+    "test": "jest",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -41,10 +42,12 @@
   },
   "homepage": "https://github.com/bigsaigon333/solve.io#readme",
   "devDependencies": {
+    "@tsconfig/node18": "^18.2.2",
+    "@tsconfig/recommended": "^1.0.3",
     "@types/jest": "^26.0.24",
-    "@types/node": "^16.4.10",
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
+    "@types/node": "^18.18.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
     "all-contributors-cli": "^6.20.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -56,7 +59,7 @@
     "ts-jest": "^27.0.4",
     "tsup": "^7.2.0",
     "tsx": "^3.13.0",
-    "typescript": "^4.3.5"
+    "typescript": "^5.2.2"
   },
   "lint-staged": {
     "*.{js,ts}": [
