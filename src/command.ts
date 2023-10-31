@@ -65,7 +65,13 @@ export class SolveCommand extends Command {
     const files = await fs.readdir(this.resolvedDirname);
     const jsFiles = files.filter((file) => file.endsWith(".js"));
 
-    if (jsFiles.length !== 1) {
+    if (jsFiles.length === 0) {
+      throw new Error(
+        `Directory ${this.resolvedDirname} must have only one js file: it doesn't have any js file.`
+      );
+    }
+
+    if (jsFiles.length > 1) {
       throw new Error(
         `Directory ${
           this.resolvedDirname
