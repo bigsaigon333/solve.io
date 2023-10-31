@@ -47,11 +47,16 @@ export class SolveCommand extends Command {
   }
 
   async validateResolvedDirname(): Promise<void> {
-    const resolvedDirname = path.isAbsolute(this.dirname)
+    let resolvedDirname = path.isAbsolute(this.dirname)
       ? this.dirname
-      : path.resolve(this.dirname);
+      : path.resolve(process.env.INIT_CWD, this.dirname);
 
-    fs.access(resolvedDirname, constants.R_OK);
+    try {
+      await fs.access(resolvedDirname, constants.R_OK);
+    } catch (error) {
+      resolvedDirname = path.resolve(process.cwd(), this.dirname);
+      await fs.access(resolvedDirname, constants.R_OK);
+    }
 
     this.resolvedDirname = resolvedDirname;
   }
