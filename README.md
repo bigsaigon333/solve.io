@@ -2,33 +2,81 @@
 
 [![npm version](https://badge.fury.io/js/solve.io.svg)](https://badge.fury.io/js/solve.io)
 
-테스트 프레임워크를 이용한 알고리즘 문제 풀이를 위한 I/O 도구
+알고리즘 문제 풀이를 위한 I/O 검증 자동화 CLI
 
 ## 1. Description
 
-[Baekjoon Online Judge](https://www.acmicpc.net/), [ALGOSPOT](https://www.algospot.com/) 등의 Problem Solving (이하 "PS") 온라인 저지에서는 문제의 입력이 Standard Input으로 주어지고, 정답을 Standard Output으로 출력해야 하는 경우가 많습니다.
+[Baekjoon Online Judge](https://www.acmicpc.net/), [ALGOSPOT](https://www.algospot.com/) 등의 Problem Solving (이하 "PS") 온라인 저지에서는 문제의 입력이 Standard Input(이하 "stdin")으로 주어지고, 정답을 Standard Output(이하 "stdout")으로 출력해야 하는 경우가 많습니다.
 
 그에 반해, [Programmers](https://programmers.co.kr/), [LeetCode](https://leetcode.com/) 등은 문제의 입력을 함수의 인자로, 정답을 함수의 반환값으로 하고 있습니다.
 
-solve&#46;io는 Standard I/O를 기반으로 하는 PS를 함수를 기반으로 하는 PS로 바꿔주는 역할을 합니다.
+solve&#46;io는 stdin/stdout를 기반으로 하는 PS 함수를 작성 후, 파일에 기재된 입력값을 넣어 실행한 결과값이 파일에 기재된 출력값과 일치하는지 검증하는 과정을 자동화하는 CLI입니다.
 
-이를 통해 jest와 같은 테스트 프레임워크를 사용하여 PS를 할 수 있게 도와줍니다.
+<!--
+solve&#46;io는 stdin/stdout를 기반으로 하는 PS를 함수를 기반으로 하는 PS로 바꿔주는 역할을 합니다.
+
+이를 통해 jest와 같은 테스트 프레임워크를 사용하여 PS를 할 수 있게 도와줍니다. -->
 
 ## 2. Usage
 
-solve.io는 CommonJS 모듈 시스템을 채택하였습니다.
+#### 1. javascript package 디렉토리로 이동하여 solve.io를 설치합니다
 
-solve.io 모듈을 import 하면 default로 `genSolve` 함수를 반환합니다.
-
-```ts
-type GenSolve = (filepath: string) => (input: string) => Promise<string>;
-
-const genSolve = require("solve.io");
+```sh
+ cd path/to/js-package
+ npm install -D @bigsaigon333/solve.io
 ```
 
-`genSolve` 함수는 PS 코드의 filepath를 인자로 받아 PS 코드를 실행시키는 함수(`solve`)를 반환합니다.
+#### 2. package.json의 scripts에 solve.io 를 추가합니다
 
-`solve`함수는 문제의 입력값을 인자로 전달 받아 PS 후 Standard Output을 string의 형태로 반환합니다.
+```json
+  "scripts": {
+    "solve.io": "solve.io"
+  }
+```
+
+#### 3. 문제를 풀 디렉토리를 다음과 같이 설정합니다
+
+```sh
+path/to/problem-directory
+├── any_file_name_is_fine.js
+├── a.in
+├── a.out
+├── b.in
+└── b.out
+```
+
+- 디렉토리 내에 js파일은 단 하나여야 합니다. (파일명은 아무 파일명이나 상관없습니다.)
+- stdin에 해당하는 파일은 확장자를 `.in`으로, stdout에 해당하는 파일은 확장자를 `.out`으로 설정하여야 합니다. 이 때, `*.in` 과 `*.out` 쌍이 맞아야 합니다.
+  예시) `test1.in`, `test1.out`
+- `*.in` 과 `*.out`의 쌍이 맞지 않는 파일은 무시됩니다.
+  예시) `c.in` 만 존재하고 `c.out`은 없으면 `c.in`에 대한 테스트는 수행하지 않습니다.
+
+#### 4. solve.io 실행
+
+```sh
+npm run solve.io path/to/problem-directory
+```
+
+##### ※ path/to/problem-directory 는 3가지 유형의 경로를 값으로 가질 수 있습니다
+
+1. 절대경로
+
+```sh
+npm run solve.io /Users/bigsaigon333/github/path/to/problem-directory
+```
+
+2. package.json 을 기준으로 하는 상대경로
+
+```sh
+npm run solve.io path/to/problem-directory
+```
+
+3. 현재 디렉토리를 기준으로 하는 상대경로
+
+```sh
+cd path/to/problem-directory
+npm run solve.io .
+```
 
 ## 3. 사용법 예시
 
@@ -62,53 +110,35 @@ const answer = require("fs")
 
 console.log(answer);
 
-// 1000.test.js
-const path = require("path");
-const genSolve = require("solve.io");
-const solve = genSolve(path.resolve(__dirname, "1000.js"));
+// a.in
+1 2
 
-test("예제 1", async () => {
-  const input = `1 2`;
-  const output = `3
-`;
-
-  expect(await solve(input)).toBe(output);
-});
+// a.out
+3
 ```
 
-#### ※ 주의사항
-
-1. `filepath`는 절대경로여야 합니다. 절대경로가 아닐 경우 예외가 발생합니다.
-
-2. 반환된 함수(이하 `Solve`)는 문제 풀이 실행 중 stderr에 출력이 있는 경우, rejected Promise를 반환합니다.
-
-## 4. FAQ
-
-### - 왜 ESModule이 아닌 CommonJS를 사용하나요?
-
-[BOJ의 컴파일 환경](https://www.acmicpc.net/help/language)은 다음과 같습니다.
+#### 디렉토리 구조
 
 ```sh
-## node.js
-
-- 언어 번호: 17
-- 실행: node Main.js
-- 버전: v14.15.0
-- 시간 제한: ×3+2 초
-- 메모리 제한: ×2 MB
+src/1000
+├── 1000.js
+├── a.in
+└── a.out
 ```
 
-node v13.x 부터 ESModule을 지원하고 있으나, 파일의 확장자가 mjs 이거나 `package.json` 의 type 이 module일 때만 ESModule을 사용할 수 있습니다.
+#### solve.io 실행결과
 
-BOJ에서는 `node Main.js`를 실행하므로 ESModule을 사용할 수 없습니다. 이에 CommonJS 모듈 시스템으로 작성하였으며, 추후에 Dual Module을 지원할 수도 있습니다.
+```sh
+npm run solve.io src/1000
 
-### - 테스트 프레임워크를 이용해서 알고리즘을 푸는게 일반적인가요?
+> boj-with-js@0.1.0 solve.io
+> solve.io src/1000
 
-아니요, 일반적이지 않습니다.
-PS의 기본은 빠른 시간내에 정확하게 문제를 푸는 것입니다. 이미 알고리즘에 숙련된 사람에게 PS는 익힌 알고리즘을 한 번 적용해보는 것이지만, 알고리즘을 공부하는 사람에게는 PS는 알고리즘을 익히는 데 좋은 도구입니다. 한 번 문제를 풀고 끝나는 것이 아니라, 여러 가지 풀이 방법을 시도해보고 더 나은 시간복잡도를 위해 리팩토링 해보는 것이 매우 중요하다고 생각합니다.
-리팩토링 시 기본은 테스트 코드를 작성하는 것입니다. 기존의 Standard I/O 를 이용한 방식에서는 테스트 코드 작성이 쉽지 않아 solve.io를 만들었습니다.
+test case 1) PASSED
 
-## 5. Contributors ✨
+```
+
+## 4. Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
@@ -121,3 +151,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+```
+
+```
