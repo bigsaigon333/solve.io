@@ -1,6 +1,6 @@
 # solve&#46;io
 
-[![npm version](https://badge.fury.io/js/solve.io.svg)](https://badge.fury.io/js/solve.io)
+[![npm version](https://badge.fury.io/js/@bigsaigon333%2Fsolve.io.svg)](https://badge.fury.io/js/@bigsaigon333%2Fsolve.io)
 
 알고리즘 문제 풀이를 위한 I/O 검증 자동화 CLI
 
