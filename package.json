@@ -1,7 +1,7 @@
 {
   "name": "@bigsaigon333/solve.io",
   "version": "0.0.4",
-  "description": "알고리즘 문제 풀이를 위한 I/O CLI",
+  "description": "알고리즘 문제 풀이를 위한 I/O 검증 자동화 CLI",
   "main": "dist/index.cjs",
   "files": [
     "/dist"
