@@ -67,7 +67,9 @@ export class SolveCommand extends Command {
 
     if (jsFiles.length !== 1) {
       throw new Error(
-        `Directory ${this.resolvedDirname} must have only one js file`
+        `Directory ${
+          this.resolvedDirname
+        } must have only one js file: ${jsFiles.join(", ")}`
       );
     }
 
