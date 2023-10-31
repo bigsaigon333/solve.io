@@ -1,4 +1,4 @@
-# solve&#46;io
+# @bigsaigon333/solve&#46;io
 
 [![npm version](https://badge.fury.io/js/@bigsaigon333%2Fsolve.io.svg)](https://badge.fury.io/js/@bigsaigon333%2Fsolve.io)
 
